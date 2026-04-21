@@ -41,17 +41,16 @@ public class Reservation {
 		return TimeUnit.DAYS.convert(diff,TimeUnit.MILLISECONDS);   // converte milisegundos em dias
 	}
 	
-	public String updateDates(Date checkIn, Date checkOut) {		
+	public void updateDates(Date checkIn, Date checkOut) {		
 		Date now = new Date();
 		if (checkIn.before(now) || checkOut.before(now)) {
-			return "Reservation dates for update must be future dates";
+			throw  new IllegalArgumentException("Reservation dates for update must be future dates");  // essa exceção é utilizada quando existe erro na passagem de argumnento
 		}
 		if (!checkOut.after(checkIn)) {
-			return "Check-out date must be after check-in date";				
-		}		
+			throw new IllegalArgumentException("Check-out date must be after check-in date");				
+		}
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
-		return null;
 	}
 
 	@Override
