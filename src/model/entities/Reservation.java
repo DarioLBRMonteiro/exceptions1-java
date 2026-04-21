@@ -16,7 +16,7 @@ public class Reservation {
 	public Reservation() {		
 	}
 
-	public Reservation(Integer roomNumber, Date checkIn, Date checkOut) throws DomainException{
+	public Reservation(Integer roomNumber, Date checkIn, Date checkOut){
 		if (!checkOut.after(checkIn)) {
 			throw new DomainException("Check-out date must be after check-in date");				
 		}		
@@ -46,7 +46,7 @@ public class Reservation {
 		return TimeUnit.DAYS.convert(diff,TimeUnit.MILLISECONDS);   // converte milisegundos em dias
 	}
 	
-	public void updateDates(Date checkIn, Date checkOut) throws DomainException {		
+	public void updateDates(Date checkIn, Date checkOut){
 		Date now = new Date();
 		if (checkIn.before(now) || checkOut.before(now)) {
 			throw  new DomainException("Reservation dates for update must be future dates");  // essa exceção é utilizada quando existe erro na passagem de argumnento
